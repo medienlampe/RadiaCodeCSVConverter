@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Project specific files
+config.json
+/input/**
+/output/**
+!.gitkeep

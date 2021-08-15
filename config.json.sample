@@ -1,0 +1,12 @@
+{
+  "serialnumber": "RC-101-000000",
+  "coefficients": [
+    0.193228,
+    9.5851,
+    0.00662241
+  ],
+  "devicename": "RadiaCode-101",
+  "polynomialorder": 2,
+  "formatversion": 120920,
+  "channels": 256
+}

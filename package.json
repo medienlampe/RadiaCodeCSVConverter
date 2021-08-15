@@ -1,0 +1,26 @@
+{
+  "name": "radiacodecsvconverter",
+  "version": "0.1.0",
+  "description": "Converts exported CSV files by the RadiaCode-101 pocket gamma spectrometer into XML.",
+  "main": "convert.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medienlampe/RadiaCodeCSVConverter.git"
+  },
+  "keywords": [
+    "radiacode-101",
+    "csv",
+    "xml",
+    "convert"
+  ],
+  "author": "Sven Bischoff (https://bischoff.media)",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/medienlampe/RadiaCodeCSVConverter/issues"
+  },
+  "homepage": "https://github.com/medienlampe/RadiaCodeCSVConverter#readme",
+  "scripts": {
+    "start": "node convert.js"
+  }
+}

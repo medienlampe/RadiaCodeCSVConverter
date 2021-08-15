@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ResultDataFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <FormatVersion />
+  <ResultDataList>
+    <ResultData>
+      <DeviceConfigReference>
+        <Name />
+      </DeviceConfigReference>
+      <BackgroundSpectrumFile></BackgroundSpectrumFile>
+      <EnergySpectrum>
+        <NumberOfChannels />
+        <SpectrumName />
+        <SerialNumber />
+        <EnergyCalibration>
+          <PolynomialOrder />
+          <Coefficients>
+            <ConfigCoefficients />
+          </Coefficients>
+        </EnergyCalibration>
+        <!--<MeasurementTime />-->
+        <Spectrum>
+          <CSVDataPoints />
+        </Spectrum>
+       </EnergySpectrum>
+      <Visible>true</Visible>
+      <PulseCollection>
+        <Format>Base64 encoded binary</Format>
+        <Pulses />
+      </PulseCollection>
+    </ResultData>
+  </ResultDataList>
+</ResultDataFile>
