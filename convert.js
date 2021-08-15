@@ -113,7 +113,15 @@ const prepareXML = async (filteredFiles) => {
   return result;
 }
 
-let configStream = await readFile('config.json');
+let configStream;
+
+try {
+  configStream = await readFile('config.json');
+} catch (error) {
+  console.info(`Note: Please make sure you created the config.json as defined in the documentation.`);
+  console.error(`Message: ${error.message}`);
+  process.exit(1);
+}
 const config = JSON.parse(configStream.toString());
 
 const files = await readFiles();
