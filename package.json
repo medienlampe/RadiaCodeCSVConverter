@@ -1,6 +1,6 @@
 {
   "name": "radiacodecsvconverter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Converts exported CSV files by the RadiaCode-101 pocket gamma spectrometer into XML.",
   "main": "convert.js",
   "type": "module",
