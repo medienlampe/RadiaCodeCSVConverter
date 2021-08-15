@@ -1,4 +1,4 @@
-# RadiaCodeCSVConverter
+# RadiaCode-101 CSV-to-XML Converter
 Converts exported CSV files by the RadiaCode-101 pocket gamma spectrometer into XML.
 
 ## Prerequisites
