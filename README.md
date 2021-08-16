@@ -3,7 +3,7 @@ Converts exported CSV files by the RadiaCode-101 pocket gamma spectrometer into 
 
 ## Prerequisites
 
-* this script needs Node 11+
+* this script needs Node 14.8+
 
 ## Usage
 * Clone this repository
