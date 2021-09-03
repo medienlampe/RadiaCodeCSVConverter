@@ -10,6 +10,7 @@ Converts exported CSV files by the RadiaCode-101 pocket gamma spectrometer into 
 * Copy `config.json.sample` to `config.json` and adjust your settings
   * You can find most of the values inside the device settings menu of the [RadiaCode-101 Windows application](https://scan-electronics.com/downloads/radiacode)
 * Put all the CSV files you want to convert into the folder `./input`
+  * make sure you add `-t<measurementtime>` to your file names, e.g. `measurement.csv` which took 2000 seconds should become `measurement-t2000.csv`
 * Run the script with `npm start` or `node convert.js`
 * You can find the converted files in the folder `./output` afterwards
 
