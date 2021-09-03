@@ -17,7 +17,7 @@
             <ConfigCoefficients />
           </Coefficients>
         </EnergyCalibration>
-        <!--<MeasurementTime />-->
+        <MeasurementTime />
         <Spectrum>
           <CSVDataPoints />
         </Spectrum>

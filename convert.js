@@ -38,16 +38,16 @@ const readFiles = async (paths) => {
     }
 
     const name = el.replace('.csv', '')
-
+    
     const promise = await readFile(`./input/${el}`);
     result[name] = promise.toString().split(/\r?\n/);
-
+    
     return promise;
   });
-
+  
   // Wait for it...
   await Promise.all(fileOps)
-
+  
   // ...and just return the finished object.
   return result;
 }
@@ -64,15 +64,28 @@ const filterFiles = (parsedFiles) => {
       parsedFiles[file][i] = el.replace(/\d+,/g, '');
     })
   })
-
+  
   return parsedFiles;
+}
+
+const destructFilename = (filename) => {
+  // let name,
+  //     measurementTime;
+
+  const dataset = filename.split('-t');
+
+  if (dataset.length < 2) {
+    throw new Error("Filename does not contain a measurement time!");
+  }
+
+  return [dataset[0], dataset[1]];
 }
 
 const prepareXML = async (filteredFiles) => {
   let result = {};
   let xmlTemplate = await readFile(`template.xml`);
   xmlTemplate = xmlTemplate.toString();
-
+  
   Object.keys(filteredFiles).forEach(el => {
     let preparedText = xmlTemplate;
     let configCoefficients = '',
@@ -82,33 +95,43 @@ const prepareXML = async (filteredFiles) => {
         serialNumber,
         channels, 
         polynomialOrder, 
-        csvDataPoints = '';
-
+        csvDataPoints = '',
+        measurementTime = 0;
+    
+    try {
+      [spectrumName, measurementTime] = destructFilename(el);
+    } catch (error) {
+      console.error(error.message);
+    }
+    
     config.coefficients.forEach(coefficient => {
       configCoefficients += `<Coefficient>${coefficient}</Coefficient>\n`;
     })
-
+    
     formatVersion = `<FormatVersion>${config.formatversion}</FormatVersion>`;
+    measurementTime = `<MeasurementTime>${measurementTime}</MeasurementTime>`;
     deviceName = `<Name>${config.devicename}</Name>`;
     serialNumber = `<SerialNumber>${config.serialnumber}</SerialNumber>`;
     channels = `<NumberOfChannels>${config.channels}</NumberOfChannels>`;
     polynomialOrder = `<PolynomialOrder>${config.polynomialorder}</PolynomialOrder>`;
-    spectrumName = `<SpectrumName>${el}</SpectrumName>`;
+    spectrumName = `<SpectrumName>${spectrumName}</SpectrumName>`;
     filteredFiles[el].forEach(datapoint => {
-      if (datapoint)
+      if (datapoint) {
         csvDataPoints += `<DataPoint>${datapoint}</DataPoint>\n`;
+      }
     })
-
+  
     preparedText = preparedText
-      .replace('<FormatVersion />', formatVersion)
-      .replace('<Name />', deviceName)
-      .replace('<NumberOfChannels />', channels)
-      .replace('<SpectrumName />', spectrumName)
-      .replace('<SerialNumber />', serialNumber)
-      .replace('<PolynomialOrder />', polynomialOrder)
-      .replace('<ConfigCoefficients />', configCoefficients)
-      .replace('<CSVDataPoints />', csvDataPoints);
-
+    .replace('<FormatVersion />', formatVersion)
+    .replace('<MeasurementTime />', measurementTime)
+    .replace('<Name />', deviceName)
+    .replace('<NumberOfChannels />', channels)
+    .replace('<SpectrumName />', spectrumName)
+    .replace('<SerialNumber />', serialNumber)
+    .replace('<PolynomialOrder />', polynomialOrder)
+    .replace('<ConfigCoefficients />', configCoefficients)
+    .replace('<CSVDataPoints />', csvDataPoints);
+    
     result[`${el}.xml`] = preparedText;
   });
 
