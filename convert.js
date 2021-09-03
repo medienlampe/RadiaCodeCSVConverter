@@ -91,14 +91,16 @@ const prepareXML = async (filteredFiles) => {
     formatVersion = `<FormatVersion>${config.formatversion}</FormatVersion>`;
     deviceName = `<Name>${config.devicename}</Name>`;
     serialNumber = `<SerialNumber>${config.serialnumber}</SerialNumber>`;
-    channels = `<Channels>${config.channels}</Channels>`;
-    polynomialOrder = `<NumberOfChannels>${config.polynomialorder}</NumberOfChannels>`;
+    channels = `<NumberOfChannels>${config.channels}</NumberOfChannels>`;
+    polynomialOrder = `<PolynomialOrder>${config.polynomialorder}</PolynomialOrder>`;
     spectrumName = `<SpectrumName>${el}</SpectrumName>`;
     filteredFiles[el].forEach(datapoint => {
-      csvDataPoints += `<DataPoint>${datapoint}</DataPoint>\n`;
+      if (datapoint)
+        csvDataPoints += `<DataPoint>${datapoint}</DataPoint>\n`;
     })
 
     preparedText = preparedText
+      .replace('<FormatVersion />', formatVersion)
       .replace('<Name />', deviceName)
       .replace('<NumberOfChannels />', channels)
       .replace('<SpectrumName />', spectrumName)
