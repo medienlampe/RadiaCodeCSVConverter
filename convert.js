@@ -96,10 +96,11 @@ const prepareXML = async (filteredFiles) => {
         channels, 
         polynomialOrder, 
         csvDataPoints = '',
-        measurementTime = 0;
+        measurementTime = 0,
+        filename;
     
     try {
-      [spectrumName, measurementTime] = destructFilename(el);
+      [filename, measurementTime] = destructFilename(el);
     } catch (error) {
       console.error(error.message);
     }
@@ -114,7 +115,7 @@ const prepareXML = async (filteredFiles) => {
     serialNumber = `<SerialNumber>${config.serialnumber}</SerialNumber>`;
     channels = `<NumberOfChannels>${config.channels}</NumberOfChannels>`;
     polynomialOrder = `<PolynomialOrder>${config.polynomialorder}</PolynomialOrder>`;
-    spectrumName = `<SpectrumName>${spectrumName}</SpectrumName>`;
+    spectrumName = `<SpectrumName>${filename}</SpectrumName>`;
     filteredFiles[el].forEach(datapoint => {
       if (datapoint) {
         csvDataPoints += `<DataPoint>${datapoint}</DataPoint>\n`;
@@ -132,7 +133,7 @@ const prepareXML = async (filteredFiles) => {
     .replace('<ConfigCoefficients />', configCoefficients)
     .replace('<CSVDataPoints />', csvDataPoints);
     
-    result[`${el}.xml`] = preparedText;
+    result[`${filename}.xml`] = preparedText;
   });
 
   return result;
